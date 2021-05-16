@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit record</title>
+</head>
+<body>
+<form th:method="PATCH" th:action="@{/records/{id}(id=${record.getId()})}" th:object="${record}">
+  <label for="title">Edit tittle: </label>
+  <input type="text" th:field="*{title}" id="title">
+  <br/>
+  <p/>
+  <label for="article">Edit article: </label>
+  <input type="text" th:field="*{article}" id="article">
+  <br/>
+  <p/>
+  <input type="submit" value="Update"/>
+</form>
+<a href="/people">Back</a>
+</body>
+</html>
