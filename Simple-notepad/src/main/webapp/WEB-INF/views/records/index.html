@@ -5,7 +5,7 @@
     <title>Records</title>
 </head>
 <body>
-
+<h2>List of records</h2>
 <div th:each="record : ${records}">
     <a th:href="@{records/{id}(id=${record.getId()})}"
        th:text="${record.getLastModified()} + ' - ' + ${record.getTitle()}">record</a>

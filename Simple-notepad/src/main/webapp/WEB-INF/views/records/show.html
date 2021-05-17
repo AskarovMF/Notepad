@@ -5,7 +5,10 @@
     <title>Record</title>
 </head>
 <body>
+<h2 th:text="${record.getTitle()}">Value</h2>
 <p th:text="${record.getArticle()}">Value</p>
+<p/>
+<hr/>
 <p th:text="${record.getLastModified()}">Value</p>
 
 <a th:href="@{/records/{id}/edit(id=${record.getId()})}">Edit</a>

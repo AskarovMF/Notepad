@@ -5,6 +5,7 @@
     <title>New record</title>
 </head>
 <body>
+<h2>Create new records</h2>
 <form th:method="POST" th:action="@{/records}" th:object="${record}">
     <label for="title">Enter title: </label>
     <input type="text" th:field="*{title}" id="title"/>
