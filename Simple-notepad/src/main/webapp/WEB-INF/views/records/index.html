@@ -8,7 +8,7 @@
 
 <div th:each="record : ${records}">
     <a th:href="@{records/{id}(id=${record.getId()})}"
-       th:text="${record.getLastModified()} + ': ' + ${record.getTitle()}">record</a>
+       th:text="${record.getLastModified()} + ' - ' + ${record.getTitle()}">record</a>
 </div>
 
 <br/>

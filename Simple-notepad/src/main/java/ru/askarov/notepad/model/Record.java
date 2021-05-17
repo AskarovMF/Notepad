@@ -3,6 +3,7 @@ package ru.askarov.notepad.model;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
@@ -39,8 +40,8 @@ public class Record {
         return article;
     }
 
-    public Date getLastModified() {
-        return lastModified;
+    public String getLastModified() {
+        return new SimpleDateFormat("dd/MM/yyyy HH:hh:mm").format(lastModified);
     }
 
     public void setArticle(String article) {

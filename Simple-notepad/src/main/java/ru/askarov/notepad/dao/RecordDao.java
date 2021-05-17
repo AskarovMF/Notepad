@@ -29,7 +29,7 @@ public class RecordDao {
         entityManager.persist(record);
     }
 
-    public void update(long id, Record record) {
+    public void update(Record record) {
         entityManager.merge(record);
     }
 
