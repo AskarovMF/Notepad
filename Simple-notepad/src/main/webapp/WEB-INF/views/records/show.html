@@ -1,27 +1,33 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th = "http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" charset="UTF-8" content="text/css">
     <title>Record</title>
+    <link type="text/css" media="all" rel="stylesheet" href="../../../css/main.css" th:href="@{/css/main.css}"/>
 </head>
-<body>
-<h2 th:text="${record.getTitle()}">Value</h2>
-<p th:text="${record.getArticle()}">Value</p>
-<p/>
-<hr/>
-<p th:text="${record.getLastModified()}">Value</p>
+<body class="container">
 
-<a th:href="@{/records/{id}/edit(id=${record.getId()})}">Edit</a>
-<p/>
+    <div>
+        <img src="../../images/logo.png" alt="STSM logo" title="STSM logo"
+             th:src="@{/images/logo.png}" th:alt-title="#{title.application}"/>
+    </div>
+    <h1 th:text="${record.getTitle()}">Value</h1>
+    <p th:text="${record.getArticle()}">Value</p>
+    <p/>
+    <hr/>
+    <p th:text="${record.getLastModified()}">Value</p>
 
-<a href="/records">Back</a>
+    <a th:href="@{/records/{id}/edit(id=${record.getId()})}">Edit</a>
+    <p/>
 
-<br/>
-<p/>
+    <a href="/records">Back</a>
 
-<form th:method="DELETE" th:action="@{/records/{id}(id=${record.getId()})}">
-    <input type="submit" value="Delete"/>
-</form>
+    <br/>
+    <p/>
+
+    <form th:method="DELETE" th:action="@{/records/{id}(id=${record.getId()})}">
+        <input type="submit" value="Delete"/>
+    </form>
 
 </body>
 </html>

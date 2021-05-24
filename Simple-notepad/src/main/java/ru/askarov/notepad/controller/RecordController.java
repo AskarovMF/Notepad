@@ -47,8 +47,7 @@ public class RecordController {
     }
 
     @PatchMapping("/{id}")
-    public String update(//@ModelAttribute("record") Record record,
-                         @RequestParam("title") String title,
+    public String update(@RequestParam("title") String title,
                          @RequestParam("article") String article,
                          @PathVariable("id") long id){
         Record record = dao.show(id);

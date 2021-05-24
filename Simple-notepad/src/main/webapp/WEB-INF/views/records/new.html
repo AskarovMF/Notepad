@@ -1,22 +1,54 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th = "http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" charset="UTF-8" content="text/css">
     <title>New record</title>
+    <link type="text/css" media="all" rel="stylesheet" href="../../../css/main.css" th:href="@{/css/main.css}"/>
 </head>
-<body>
-<h2>Create new records</h2>
-<form th:method="POST" th:action="@{/records}" th:object="${record}">
-    <label for="title">Enter title: </label>
-    <input type="text" th:field="*{title}" id="title"/>
+<style>
+    #title {
+        width: 350px;
+        height: 1px;
+        padding: 15px;
+        margin-left: 17px;
+        border: 1px solid darkorange;
+        border-radius: 8px;
+    }
+</style>
+
+<style>
+    #article {
+        width: 700px;
+        height: 250px;
+        padding: 20px;
+        border: 1px solid darkorange;
+        border-radius: 8px;
+    }
+</style>
+
+<body class="container">
+    <div>
+        <img src="../../images/logo.png" alt="STSM logo" title="STSM logo"
+             th:src="@{/images/logo.png}" th:alt-title="#{title.application}"/>
+    </div>
+
+    <h2>Create new records</h2>
+
+    <form th:method="POST" th:action="@{/records}" th:object="${record}">
+        <label for="title">Enter title: </label>
+        <input type="text" th:field="*{title}" id="title"/>
+        <br/>
+
+        <label for="article">Enter article: </label>
+        <input type="text" th:field="*{article}" id="article"/>
+        <br/>
+
+        <input type="submit" value="Create!">
+    </form>
+
     <br/>
-    <label for="article">Enter article: </label>
-    <input type="text" th:field="*{article}" id="article"/>
-    <br/>
-    <input type="submit" value="Create!">
-</form>
-<br/>
-<p/>
-<a href="/records">Back</a>
+    <p></p>
+
+    <a href="/records">Back</a>
 </body>
 </html>

@@ -1,20 +1,29 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th = "http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" charset="UTF-8" content="text/css">
     <title>Records</title>
+    <link type="text/css" media="all" rel="stylesheet" href="../../../css/main.css" th:href="@{/css/main.css}"/>
 </head>
 <body>
-<h2>List of records</h2>
-<div th:each="record : ${records}">
-    <a th:href="@{records/{id}(id=${record.getId()})}"
-       th:text="${record.getLastModified()} + ' - ' + ${record.getTitle()}">record</a>
+
+<div>
+    <img src="../../images/logo.png" alt="STSM logo" title="STSM logo"
+         th:src="@{/images/logo.png}" th:alt-title="#{title.application}"/>
 </div>
 
-<br/>
-<hr/>
 
-<a href="/records/new">Create new record</a>
+    <header class="header">Welcome to Notepad!</header>
 
+    <h2>List of records</h2>
+
+    <div th:each="record : ${records}">
+        <a th:href="@{records/{id}(id=${record.getId()})}"
+           th:text="${record.getLastModified()} + ' - ' + ${record.getTitle()}">record</a>
+    </div>
+
+    <br/>
+    <hr/>
+    <a class="btn btn-alt" href="/records/new">Create new record</a>
 </body>
 </html>

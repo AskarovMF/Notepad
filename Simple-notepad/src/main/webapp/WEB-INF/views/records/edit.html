@@ -1,22 +1,33 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th = "http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" charset="UTF-8" content="text/css">
     <title>Edit record</title>
+    <link type="text/css" media="all" rel="stylesheet" href="../../../css/main.css" th:href="@{/css/main.css}"/>
 </head>
-<body>
-<h2>Change the entry</h2>
-<form th:method="PATCH" th:action="@{/records/{id}(id=${record.getId()})}" th:object="${record}">
-  <label for="title">Edit tittle: </label>
-  <input type="text" th:field="*{title}" id="title">
-  <br/>
-  <p/>
-  <label for="article">Edit article: </label>
-  <input type="text" th:field="*{article}" id="article">
-  <br/>
-  <p/>
-  <input type="submit" value="Update"/>
-</form>
-<a href="/records">Back</a>
+<body class="container">
+    <div>
+        <img src="../../images/logo.png" alt="STSM logo" title="STSM logo"
+             th:src="@{/images/logo.png}" th:alt-title="#{title.application}"/>
+    </div>
+    <h2>Change the entry</h2>
+
+    <form th:method="PATCH" th:action="@{/records/{id}(id=${record.getId()})}" th:object="${record}">
+        <label for="title">Edit tittle: </label>
+        <input type="text" th:field="*{title}" id="title">
+
+        <br/>
+        <p/>
+
+        <label for="article">Edit article: </label>
+        <input type="text" th:field="*{article}" id="article">
+
+        <br/>
+        <p/>
+
+        <input type="submit" value="Update"/>
+    </form>
+
+    <a href="/records">Back</a>
 </body>
 </html>

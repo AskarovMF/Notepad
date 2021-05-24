@@ -1,5 +1,7 @@
 package ru.askarov.notepad.dao;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import ru.askarov.notepad.model.Record;
 
@@ -12,6 +14,7 @@ import java.util.List;
 @Repository
 @Transactional
 public class RecordDao {
+    private static final Logger LOGGER = LoggerFactory.getLogger(RecordDao.class);
 
     @PersistenceContext
     private EntityManager entityManager;

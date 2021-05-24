@@ -15,6 +15,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.thymeleaf.spring5.SpringTemplateEngine;
@@ -39,6 +40,7 @@ public class SpringConfig implements WebMvcConfigurer {
         this.environment = environment;
     }
 
+    @Bean
     public SpringResourceTemplateResolver templateResolver(){
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
         templateResolver.setApplicationContext(context);
@@ -48,6 +50,7 @@ public class SpringConfig implements WebMvcConfigurer {
         return templateResolver;
     }
 
+    @Bean
     public SpringTemplateEngine templateEngine(){
         SpringTemplateEngine templateEngine = new SpringTemplateEngine();
         templateEngine.setTemplateResolver(templateResolver());
@@ -56,6 +59,7 @@ public class SpringConfig implements WebMvcConfigurer {
         return templateEngine;
     }
 
+    @Bean
     public DataSource dataSource(){
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(environment.getProperty("db.JdbcDriver"));
@@ -101,6 +105,12 @@ public class SpringConfig implements WebMvcConfigurer {
     @Bean
     public PersistenceExceptionTranslationPostProcessor exceptionTranslationPostProcessor(){
         return new PersistenceExceptionTranslationPostProcessor();
+    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/images/**").addResourceLocations("/images/");
+        registry.addResourceHandler("/css/**").addResourceLocations("/css/");
     }
 
     @Override
