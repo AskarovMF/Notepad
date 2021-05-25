@@ -46,6 +46,7 @@ public class SpringConfig implements WebMvcConfigurer {
         templateResolver.setApplicationContext(context);
         templateResolver.setPrefix("/WEB-INF/views/");
         templateResolver.setSuffix(".html");
+        templateResolver.setCharacterEncoding("UTF-8");
 
         return templateResolver;
     }
@@ -57,6 +58,17 @@ public class SpringConfig implements WebMvcConfigurer {
         templateEngine.setEnableSpringELCompiler(true);
 
         return templateEngine;
+    }
+
+    @Override
+    public void configureViewResolvers(ViewResolverRegistry registry) {
+        ThymeleafViewResolver thymeleafViewResolver = new ThymeleafViewResolver();
+
+        thymeleafViewResolver.setTemplateEngine(templateEngine());
+        thymeleafViewResolver.setContentType("text/html;charset=UTF-8");
+        thymeleafViewResolver.setCharacterEncoding("utf-8");
+
+        registry.viewResolver(thymeleafViewResolver);
     }
 
     @Bean
@@ -111,12 +123,5 @@ public class SpringConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/images/**").addResourceLocations("/images/");
         registry.addResourceHandler("/css/**").addResourceLocations("/css/");
-    }
-
-    @Override
-    public void configureViewResolvers(ViewResolverRegistry registry) {
-        ThymeleafViewResolver thymeleafViewResolver = new ThymeleafViewResolver();
-        thymeleafViewResolver.setTemplateEngine(templateEngine());
-        registry.viewResolver(thymeleafViewResolver);
     }
 }

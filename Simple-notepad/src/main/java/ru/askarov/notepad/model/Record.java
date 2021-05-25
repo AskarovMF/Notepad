@@ -24,10 +24,6 @@ public class Record {
     public Record() {
     }
 
-    public Record(String article) {
-        this.article = article;
-    }
-
     public long getId() {
         return id;
     }

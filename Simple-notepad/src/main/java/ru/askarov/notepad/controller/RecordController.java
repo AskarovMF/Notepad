@@ -10,7 +10,7 @@ import ru.askarov.notepad.model.Record;
 @Controller
 @RequestMapping("/records")
 public class RecordController {
-    private RecordDao dao;
+    private final RecordDao dao;
 
     @Autowired
     public RecordController(RecordDao dao) {
