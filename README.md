@@ -1,4 +1,4 @@
 # Веб-приложение "Notepad".
 
-Использованные технологии: Spring MVC, Java Persistence API, Thymeleaf, Maven, HTML, CSS.
+Использованные технологии: Spring MVC, Java Persistence API, JUnit 5, Thymeleaf, Maven, HTML, CSS.
 Подключение осуществляется через Tomcat server.
