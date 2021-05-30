@@ -1,4 +1,4 @@
-package ru.askarov.notepad.test;
+package ru.askarov.notepad.dao;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -9,7 +9,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.web.WebAppConfiguration;
 import ru.askarov.notepad.config.SpringConfigTest;
-import ru.askarov.notepad.dao.RecordDao;
 import ru.askarov.notepad.model.Record;
 
 import javax.transaction.Transactional;
@@ -94,5 +93,4 @@ public class RecordDaoTest {
 
         assertNull(expected);
     }
-
 }
