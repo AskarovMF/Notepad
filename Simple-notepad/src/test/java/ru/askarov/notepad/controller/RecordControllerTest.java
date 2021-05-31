@@ -9,6 +9,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.ui.ExtendedModelMap;
 import org.springframework.ui.Model;
 import ru.askarov.notepad.config.SpringConfig;
+import ru.askarov.notepad.controller.RecordController;
 import ru.askarov.notepad.dao.RecordDao;
 import ru.askarov.notepad.model.Record;
 import java.util.Arrays;
