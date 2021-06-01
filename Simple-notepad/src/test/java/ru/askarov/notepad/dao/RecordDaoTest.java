@@ -1,5 +1,6 @@
 package ru.askarov.notepad.dao;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -10,7 +11,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.web.WebAppConfiguration;
 import ru.askarov.notepad.config.SpringConfigTest;
 import ru.askarov.notepad.model.Record;
-
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -20,25 +20,30 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 @ContextConfiguration(classes = {SpringConfigTest.class})
 @ExtendWith(SpringExtension.class)
 @WebAppConfiguration
-@Transactional
+@Transactional(Transactional.TxType.REQUIRES_NEW)
+@Rollback
 public class RecordDaoTest {
 
     @Autowired
     private RecordDao dao;
+    Record record;
+
+    @BeforeEach
+    void init(){
+        record = new Record();
+        record.setTitle("Test");
+        record.setArticle("Test note");
+
+        dao.save(record);
+    }
 
     @Test
-    @Rollback
     @DisplayName("Добавление записей")
     void testAddRecord(){
-        Record first = new Record();
-        first.setTitle("First");
-        first.setArticle("Test note record");
-
         Record second = new Record();
-        second.setTitle("Second");
+        second.setTitle("Second note");
         second.setArticle("Test note second");
 
-        dao.save(first);
         dao.save(second);
 
         List<Record> list = dao.index();
@@ -46,30 +51,16 @@ public class RecordDaoTest {
     }
 
     @Test
-    @Rollback
     @DisplayName("Содержание записи")
     void testContentRecord(){
-        Record record = new Record();
-        record.setTitle("Test");
-        record.setArticle("Test note");
-
-        dao.save(record);
-
         Record expected = dao.show(record.getId());
 
         assertEquals(record, expected);
     }
 
     @Test
-    @Rollback
     @DisplayName("Обновление записи")
     void testUpdateRecord(){
-        Record record = new Record();
-        record.setTitle("Test");
-        record.setArticle("Test note");
-
-        dao.save(record);
-
         record.setTitle("New Title");
         record.setArticle("New Article");
 
@@ -80,16 +71,9 @@ public class RecordDaoTest {
     }
 
     @Test
-    @Rollback
     @DisplayName("Удаление записи")
     void testDeleteRecord(){
-        Record record = new Record();
-        record.setTitle("Test");
-        record.setArticle("Test note");
-
-        dao.save(record);
         dao.delete(record.getId());
-
         Record expected = dao.show(record.getId());
 
         assertNull(expected);
