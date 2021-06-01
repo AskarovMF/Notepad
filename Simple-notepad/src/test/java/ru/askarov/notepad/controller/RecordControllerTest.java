@@ -1,5 +1,6 @@
 package ru.askarov.notepad.controller;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
@@ -9,7 +10,6 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.ui.ExtendedModelMap;
 import org.springframework.ui.Model;
 import ru.askarov.notepad.config.SpringConfig;
-import ru.askarov.notepad.controller.RecordController;
 import ru.askarov.notepad.dao.RecordDao;
 import ru.askarov.notepad.model.Record;
 import java.util.Arrays;
@@ -22,15 +22,21 @@ import static org.junit.jupiter.api.Assertions.*;
 @WebAppConfiguration
 class RecordControllerTest {
 
+    RecordDao dao;
+    RecordController controller;
+
+    @BeforeEach
+    public void init() {
+        dao = Mockito.mock(RecordDao.class);
+        controller = new RecordController(dao);
+    }
+
     @Test
     void index() {
         List<Record> records = Arrays.asList(new Record(), new Record(), new Record());
-        RecordDao dao = Mockito.mock(RecordDao.class);
-        RecordController controller = new RecordController(dao);
-        Model model = new ExtendedModelMap();
-
         Mockito.when(dao.index()).thenReturn(records);
 
+        Model model = new ExtendedModelMap();
         String viewName = controller.index(model);
 
         assertEquals("records/index", viewName);
@@ -41,12 +47,9 @@ class RecordControllerTest {
     @Test
     void show() {
         Record record = new Record();
-        RecordDao dao = Mockito.mock(RecordDao.class);
-        RecordController controller = new RecordController(dao);
         Model model = new ExtendedModelMap();
 
         Mockito.when(dao.show(Mockito.anyLong())).thenReturn(record);
-
         String viewName = controller.show(Mockito.anyLong(), model);
 
         assertEquals("records/show", viewName);
@@ -57,9 +60,6 @@ class RecordControllerTest {
     @Test
     void newRecord() {
         Record record = new Record();
-        RecordDao dao = Mockito.mock(RecordDao.class);
-        RecordController controller = new RecordController(dao);
-
         String viewName = controller.newRecord(record);
 
         assertEquals("records/new", viewName);
@@ -68,9 +68,6 @@ class RecordControllerTest {
     @Test
     void create() {
         Record record = new Record();
-        RecordDao dao = Mockito.mock(RecordDao.class);
-        RecordController controller = new RecordController(dao);
-
         String viewName = controller.create(record);
 
         assertEquals("redirect:/records", viewName);
@@ -80,12 +77,9 @@ class RecordControllerTest {
     @Test
     void edit() {
         Record record = new Record();
-        RecordDao dao = Mockito.mock(RecordDao.class);
-        RecordController controller = new RecordController(dao);
         Model model = new ExtendedModelMap();
 
         Mockito.when(dao.show(Mockito.anyLong())).thenReturn(record);
-
         String viewName = controller.edit(model, Mockito.anyLong());
 
         assertEquals("records/edit", viewName);
@@ -96,9 +90,6 @@ class RecordControllerTest {
     @Test
     void update() {
         Record record = new Record();
-        RecordDao dao = Mockito.mock(RecordDao.class);
-        RecordController controller = new RecordController(dao);
-
         Mockito.when(dao.show(Mockito.anyLong())).thenReturn(record);
 
         String viewName = controller.update("Test title", "Test article", Mockito.anyLong());
@@ -113,9 +104,6 @@ class RecordControllerTest {
 
     @Test
     void delete() {
-        RecordDao dao = Mockito.mock(RecordDao.class);
-        RecordController controller = new RecordController(dao);
-
         String viewName = controller.delete(Mockito.anyLong());
 
         assertEquals("redirect:/records", viewName);
